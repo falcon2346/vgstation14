@@ -17,7 +17,7 @@ public sealed class RampingStationEventSchedulerSystem : GameRuleSystem<RampingS
     /// </summary>
     public float GetChaosModifier(EntityUid uid, RampingStationEventSchedulerComponent component)
     {
-        var roundTime = (float) _gameTicker.RoundDuration().TotalSeconds;
+        var roundTime = (float)_gameTicker.RoundDuration().TotalSeconds;
         if (roundTime > component.EndTime)
             return component.MaxChaos;
 
@@ -69,7 +69,7 @@ public sealed class RampingStationEventSchedulerSystem : GameRuleSystem<RampingS
     {
         var mod = GetChaosModifier(uid, component);
 
-        // 4-12 minutes baseline. Will get faster over time as the chaos mod increases.
-        component.TimeUntilNextEvent = _random.NextFloat(240f / mod, 720f / mod);
+        // 10-30 minutes baseline. Will get faster over time as the chaos mod increases.
+        component.TimeUntilNextEvent = _random.NextFloat(600f / mod, 1800f / mod);
     }
 }
